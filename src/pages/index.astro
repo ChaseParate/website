@@ -1,16 +1,71 @@
 ---
 import "@fontsource-variable/inter";
+import Image from "astro/components/Image.astro";
+
+import headshot from "../assets/headshot.jpg";
+import Icon, { type IconName } from "../components/Icon.astro";
+
+const links: { text: string; link: string; iconName: IconName }[] = [
+  {
+    text: "Email",
+    link: "mailto:me@chasehark.com",
+    iconName: "envelope",
+  },
+  {
+    text: "Résumé",
+    link: "/resume.pdf",
+    iconName: "read-cv-logo",
+  },
+  {
+    text: "GitHub",
+    link: "https://github.com/ChaseParate",
+    iconName: "github-logo",
+  },
+  {
+    text: "LinkedIn",
+    link: "https://www.linkedin.com/in/chase-harkcom",
+    iconName: "linkedin-logo",
+  },
+];
 ---
 
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
-    <title>Astro</title>
+    <title>Chase Harkcom</title>
   </head>
-  <body class="m-8">
-    <h1 class="text-5xl font-semibold">Astro</h1>
+  <body class="flex h-screen items-center justify-center">
+    <main
+      class="m-4 flex max-w-screen-lg flex-col items-center gap-8 rounded-lg border border-gray-200 bg-gray-50 p-8 md:flex-row md:gap-12"
+    >
+      <Image
+        src={headshot}
+        alt="Headshot"
+        class="max-w-64 rounded-lg border-4 border-red-500"
+      />
+      <div>
+        <h1 class="mb-6 text-balance text-center text-2xl md:mb-4 md:text-left">
+          <span class="font-semibold">Hi, I'm Chase Harkcom.</span> I am a prospective
+          software engineer and an undergraduate student at the University of Utah,
+          pursuing my Honors Bachelor of Science degree in Computer Science.
+        </h1>
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {
+            links.map((link) => (
+              <a
+                href={link.link}
+                class="flex w-full flex-row items-center justify-center gap-2 rounded-full border-2 border-red-500 bg-white px-4 py-2"
+                target="_blank"
+              >
+                <Icon iconName={link.iconName} />
+                {link.text}
+              </a>
+            ))
+          }
+        </div>
+      </div>
+    </main>
   </body>
 </html>
